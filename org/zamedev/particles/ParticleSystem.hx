@@ -67,6 +67,7 @@ class ParticleSystem {
     private var prevTime : Float = -1.0;
     private var emitCounter : Float = 0.0;
     private var elapsedTime : Float = 0.0;
+    private var timeMultiplier : Float = 1.0;
 
     public var __particleList : Array<Particle> = [];
     public var __particleCount : Int = 0;
@@ -113,7 +114,7 @@ class ParticleSystem {
             return false;
         }
 
-        var dt = currentTime - prevTime;
+        var dt = (currentTime - prevTime) * timeMultiplier;
 
         if (dt < 0.0001) {
             return false;
@@ -242,6 +243,11 @@ class ParticleSystem {
         }
 
         active = true;
+    }
+
+    public function setTimeMultiplier(value:Float):Void
+    {
+        timeMultiplier = value;
     }
 
     public function stop() : Void {
